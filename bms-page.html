@@ -11,7 +11,10 @@
 
 
     <script src="https://kit.fontawesome.com/1eef294ba4.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js.js"></script>
+    <script type="text/javascript" src="./utils/data.js"></script>
 
     <title>Document</title>
 </head>
@@ -83,10 +86,90 @@
         </div>
         <div class="main-content">
             <div id="dashboard" class="tabcontent">
-                <h3>Dashboard</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus ut massa et ullamcorper. In hac
-                    habitasse platea dictumst. Quisque tempor odio sit amet aliquam iaculis.</p>
-                <p>If you are feeling Jazzy click <a href="#!" onclick="tabLink('Jazz')">HERE</a></p>
+                <main>
+                    <div class="main-top-dashboard"></div>
+                    <div class="battery-indikator">
+                        <div class="animated-progress battery-percentage progress-blue">
+                            <span data-progress="35"></span>
+                        </div>
+                        <div class="animated-progress progress-green">
+                            <span></span> <span data-progress="60"></span>
+                        </div>
+                        <div class="animated-progress progress-purple">
+                            <span></span> <span data-progress="70"></span>
+                        </div>
+                        <div class="animated-progress progress-red">
+                            <span></span> <span data-progress="85"></span>
+                        </div>
+                    </div>
+                    <div class="chart-section">
+                        <div>
+                            <select>
+                                <option value="battery1">battery 1</option>
+                                <option value="battery2">battery 2</option>
+                                <option value="battery3">battery 3</option>
+                                <option value="battery4">battery 4</option>
+                                <option value="battery5">battery 5</option>
+                                <option value="battery6">battery 6</option>
+                                <option value="battery7">battery 7</option>
+                                <option value="battery8">battery 8</option>
+                                <option value="battery9">battery 9</option>
+                                <option value="battery10">battery 10</option>
+                                <option value="battery11">battery 11</option>
+                                <option value="battery12">battery 12</option>
+
+                            </select>
+                        </div>
+                        <div class="battery1 box">
+                            <canvas id="myChart1" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery2 box">
+                            <canvas id="myChart2" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery3 box">
+                            <canvas id="myChart3" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery4 box">
+                            <canvas id="myChart4" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery5 box">
+                            <canvas id="myChart5" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery6 box">
+                            <canvas id="myChart6" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery7 box">
+                            <canvas id="myChart7" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery8 box">
+                            <canvas id="myChart8" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery9 box">
+                            <canvas id="myChart9" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery10 box">
+                            <canvas id="myChart10" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery11 box">
+                            <canvas id="myChart11" width="400" height="100%"></canvas>
+                        </div>
+                        <div class="battery12 box">
+                            <canvas id="myChart12" width="400" height="100%"></canvas>
+                        </div>
+                        <!-- <div class="dropdown-battery-list">
+                            <div class="dropdown">
+                                <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+                                <div id="myDropdown" class="dropdown-content">
+                                    <button onclick="battery1()">1</button>
+                                    <button onclick="battery2()">2</button>
+                                    <button>3</button>
+                                </div>
+                            </div>
+                        </div>-->
+
+                    </div>
+                </main>
+
             </div>
 
             <div id="battery-status" class="tabcontent" style="display:none;">
@@ -117,6 +200,91 @@
             </div>
         </div>
     </div>
+
+    <script>
+        new Chart(
+            document.getElementById('myChart1'),
+            config1
+        );
+        new Chart(
+            document.getElementById('myChart2'),
+            config2
+        );
+        // new Chart(
+        //     document.getElementById('myChart3'),
+        //     config3
+        // );
+        // new Chart(
+        //     document.getElementById('myChart4'),
+        //     config4
+        // );
+        // new Chart(
+        //     document.getElementById('myChart5'),
+        //     config5
+        // );
+        // new Chart(
+        //     document.getElementById('myChart6'),
+        //     config6
+        // );
+        // new Chart(
+        //     document.getElementById('myChart7'),
+        //     config7
+        // );
+        // new Chart(
+        //     document.getElementById('myChart8'),
+        //     config8
+        // );
+        // new Chart(
+        //     document.getElementById('myChart9'),
+        //     config9
+        // );
+        // new Chart(
+        //     document.getElementById('myChart10'),
+        //     config10
+        // );
+        // new Chart(
+        //     document.getElementById('myChart11'),
+        //     config11
+        // );
+        // new Chart(
+        //     document.getElementById('myChart12'),
+        //     config12
+        // );
+
+        $(document).ready(function () {
+            $("select").change(function () {
+                $(this).find("option:selected").each(function () {
+                    var optionValue = $(this).attr("value");
+                    if (optionValue) {
+                        $(".box").not("." + optionValue).hide();
+                        $("." + optionValue).show();
+                    } else {
+                        $(".box").hide();
+                    }
+                });
+            }).change();
+        });
+
+        $(".animated-progress span").each(function () {
+            $(this).animate(
+                {
+                    width: $(this).attr("data-progress") + "%",
+                },
+                1000
+            );
+            $(this).text($(this).attr("data-progress") + "%");
+        });
+
+        $(".animated-progress span").each(function () {
+            $(this).animate(
+                {
+                    width: $(this).attr("battery-percentage") + "%",
+                },
+                1000
+            );
+            $(this).text($(this).attr("data-progress") + "%");
+        });
+    </script>
 
 </body>
 
